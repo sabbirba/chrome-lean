@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Shell syntax
+        run: for f in setup.sh scripts/*.sh; do zsh -n "$f"; done
+      - name: Python syntax
+        run: python3 -m py_compile scripts/flags.py
+      - name: Node syntax
+        run: node --check scripts/verify.mjs && node --check scripts/bench.mjs
+      - name: Flags script
+        run: |
+          echo '{}' > "$RUNNER_TEMP/Local State"
+          python3 -I scripts/flags.py "$RUNNER_TEMP/Local State"
+          python3 -c "import json,sys; d=json.load(open(sys.argv[1])); assert len(d['browser']['enabled_labs_experiments']) == 17" "$RUNNER_TEMP/Local State"

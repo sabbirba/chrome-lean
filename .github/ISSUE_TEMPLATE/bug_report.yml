@@ -1,0 +1,31 @@
+name: Bug report
+description: Something broke or a policy shows an error
+labels: [bug]
+body:
+  - type: input
+    id: macos
+    attributes:
+      label: macOS version
+      placeholder: "15.4"
+    validations:
+      required: true
+  - type: input
+    id: chrome
+    attributes:
+      label: Chrome version
+      description: From chrome://version
+      placeholder: "155.0.8059.85"
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you ran, what you expected and what happened instead
+    validations:
+      required: true
+  - type: textarea
+    id: verify
+    attributes:
+      label: Output of zsh scripts/verify.sh
+      render: text

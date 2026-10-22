@@ -1,0 +1,16 @@
+name: Feature request
+description: Suggest a policy, flag or improvement
+labels: [enhancement]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: What should Chrome Lean change
+      description: Include the policy or flag name if you know it
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why
+      description: What it improves, and any downside
